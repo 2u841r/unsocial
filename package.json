@@ -1,0 +1,52 @@
+{
+  "name": "unsocial",
+  "version": "1.0.0",
+  "description": "A lightweight React component that detects when users are viewing your site in social media apps",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2u841r/unsocial.git"
+  },
+  "bugs": {
+    "url": "https://github.com/2u841r/unsocial/issues"
+  },
+  "scripts": {
+    "build": "tsc && rollup -c",
+    "publish": "npm run build && npm publish --access public"
+  },
+  "keywords": [
+    "react",
+    "social-media",
+    "browser-detection",
+    "facebook",
+    "instagram",
+    "in-app-browser",
+    "typescript"
+  ],
+  "author": "Zubair Inb Zamir",
+  "license": "MIT",
+  "packageManager": "pnpm@10.14.0",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}
