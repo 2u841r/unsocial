@@ -106,18 +106,18 @@ const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps> = ({
       aria-modal="true"
       aria-labelledby="popup-title"
     >
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-sm w-full p-6 animate-in fade-in duration-200">
+      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl w-full max-w-sm mx-auto p-6 animate-in fade-in duration-200 overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <h3
             id="popup-title"
-            className="text-lg font-semibold text-gray-900 dark:text-gray-100"
+            className="text-lg font-semibold text-gray-900 dark:text-gray-100 pr-2 truncate"
           >
             {text.title}
           </h3>
           <button
             onClick={handleClose}
-            className="text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 flex-shrink-0"
             aria-label="Close popup"
           >
             <svg
@@ -138,7 +138,7 @@ const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps> = ({
 
         {/* Content */}
         <div className="mb-6">
-          <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+          <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 break-words">
             {text.description}
           </p>
 
@@ -158,14 +158,14 @@ const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps> = ({
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              {text.howToTitle}
+              <span className="break-words">{text.howToTitle}</span>
             </p>
             <ol className="text-blue-700 dark:text-blue-300 text-sm space-y-2">
               <li className="flex items-start">
                 <span className="bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-full w-5 h-5 flex items-center justify-center text-xs font-medium mr-3 mt-0.5 flex-shrink-0">
                   1
                 </span>
-                <span>
+                <span className="break-words">
                   Tap the <strong>three dots (⋯)</strong> in the top right
                   corner
                 </span>
@@ -174,7 +174,7 @@ const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps> = ({
                 <span className="bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-full w-5 h-5 flex items-center justify-center text-xs font-medium mr-3 mt-0.5 flex-shrink-0">
                   2
                 </span>
-                <span>
+                <span className="break-words">
                   Select <strong>"Open in External Browser"</strong> or{" "}
                   <strong>"Open in Chrome/Safari"</strong>
                 </span>
