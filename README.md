@@ -2,7 +2,7 @@
 
 A lightweight React component that detects when users are viewing your website in social media apps' internal browsers (Facebook, Instagram, etc.) and shows a helpful popup encouraging them to open the page in their external browser for a better experience.
 
-[![npm version](https://img.shields.io/npm/v/social-browser-detector.svg)](https://www.npmjs.com/package/social-browser-detector)
+[![npm version](https://img.shields.io/npm/v/social-browser-detector.svg)](https://www.npmjs.com/package/unsocial)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
