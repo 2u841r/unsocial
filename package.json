@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A lightweight React component that detects when users are viewing your site in social media apps",
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
@@ -13,8 +12,10 @@
     "url": "https://github.com/2u841r/unsocial/issues"
   },
   "scripts": {
-    "build": "tsc && rollup -c",
-    "publish": "npm run build && npm publish --access public"
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build",
+    "publish": "npm publish --access public"
   },
   "keywords": [
     "react",
@@ -31,8 +32,7 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.js"
+      "default": "./dist/index.js"
     }
   },
   "files": [
@@ -41,12 +41,10 @@
     "LICENSE"
   ],
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react": ">=16.8.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
     "typescript": "^5.0.0"
   }
 }

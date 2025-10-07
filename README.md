@@ -177,9 +177,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙋 Support
 
-- 📧 **Email**: your-email@domain.com
-- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/social-browser-detector/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/social-browser-detector/discussions)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/2u841r/social-browser-detector/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/2u841r/social-browser-detector/discussions)
 
 ## ⭐ Show your support
 
