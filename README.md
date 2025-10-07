@@ -19,8 +19,11 @@ A lightweight React component that detects when users are viewing your website i
 ## 🚀 Installation
 
 ```bash
-pnpm add social-browser-detector
-npm install social-browser-detector
+pnpm add unsocial
+```
+
+```bash
+npm install unsocial
 ```
 
 ## 📋 Requirements
@@ -33,7 +36,7 @@ npm install social-browser-detector
 ### Basic Usage
 
 ```tsx
-import SocialBrowserDetector from "social-browser-detector";
+import SocialBrowserDetector from "unsocial";
 
 function App() {
   return (
@@ -136,8 +139,8 @@ When a social media browser is detected, users see:
 ### Local Development
 
 ```bash
-git clone https://github.com/yourusername/social-browser-detector
-cd social-browser-detector
+git clone https://github.com/2u841r/unsocial
+cd unsocial
 npm install
 npm run dev
 ```
@@ -170,8 +173,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙋 Support
 
-- 🐛 **Issues**: [GitHub Issues](https://github.com/2u841r/social-browser-detector/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/2u841r/social-browser-detector/discussions)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/2u841r/unsocial/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/2u841r/unsocial/discussions)
 
 ## ⭐ Show your support
 
