@@ -190,3 +190,5 @@ Social media apps use internal browsers that often have limited functionality, s
 - Complete JavaScript/CSS support
 
 Made with ❤️ for better web experiences
+
+![](https://rs2.deno.dev/2u841r/unsocial)
