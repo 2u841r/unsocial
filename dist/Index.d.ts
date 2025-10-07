@@ -38,4 +38,4 @@ interface SocialBrowserDetectorProps {
  */
 declare const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps>;
 export default SocialBrowserDetector;
-//# sourceMappingURL=Index.d.ts.map
+//# sourceMappingURL=index.d.ts.map
