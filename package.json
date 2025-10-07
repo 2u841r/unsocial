@@ -1,6 +1,6 @@
 {
   "name": "unsocial",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A lightweight React component that detects when users are viewing your site in social media apps",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
