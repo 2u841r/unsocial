@@ -19,6 +19,8 @@ interface SocialBrowserDetectorProps {
   };
   /** Enable debug mode to always show the popup */
   debugMode?: boolean;
+  /** Show the "Continue Here" button (default: true). Set false to force users toward the external browser. */
+  showContinueButton?: boolean;
 }
 
 /**
@@ -27,10 +29,11 @@ interface SocialBrowserDetectorProps {
  * and shows a popup encouraging them to open in external browser.
  *
  * Automatically respects user's system dark/light mode preference.
+ * Fully self-contained styling: no CSS framework required.
  *
  * @example
  * ```tsx
- * import SocialBrowserDetector from 'social-browser-detector';
+ * import SocialBrowserDetector from 'unsocial';
  *
  * function App() {
  *   return (
@@ -46,6 +49,7 @@ const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps> = ({
   className = "",
   customText,
   debugMode = false,
+  showContinueButton = true,
 }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [detectedApp, setDetectedApp] = useState<string>("");
@@ -135,38 +139,101 @@ const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps> = ({
     continueButton: customText?.continueButton || "Continue Here",
   };
 
+  const stepBadgeStyle: React.CSSProperties = {
+    boxSizing: "border-box",
+    borderRadius: "9999px",
+    width: "20px",
+    height: "20px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "12px",
+    fontWeight: 500,
+    marginRight: "12px",
+    marginTop: "2px",
+    flexShrink: 0,
+    backgroundColor: isDark ? "#1e3a8a" : "#bfdbfe",
+    color: isDark ? "#bfdbfe" : "#1e40af",
+  };
+
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${className}`}
-      style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+      className={className}
+      style={{
+        boxSizing: "border-box",
+        position: "fixed",
+        inset: 0,
+        zIndex: 2147483647,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "16px",
+        backgroundColor: "rgba(0,0,0,0.5)",
+        fontFamily:
+          "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+        lineHeight: 1.5,
+      }}
       role="dialog"
       aria-modal="true"
       aria-labelledby="popup-title"
     >
       <div
-        className="rounded-lg shadow-xl w-full max-w-sm mx-auto p-6 overflow-hidden"
         style={{
+          boxSizing: "border-box",
+          borderRadius: "8px",
+          boxShadow: "0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)",
+          width: "100%",
+          maxWidth: "384px",
+          margin: "0 auto",
+          padding: "24px",
+          overflow: "hidden",
           backgroundColor: isDark ? "#1f2937" : "#ffffff",
           border: `1px solid ${isDark ? "#374151" : "#e5e7eb"}`,
         }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between mb-4">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: "16px",
+          }}
+        >
           <h3
             id="popup-title"
-            className="text-lg font-semibold pr-2 truncate"
-            style={{ color: isDark ? "#f3f4f6" : "#111827" }}
+            style={{
+              margin: 0,
+              fontSize: "18px",
+              fontWeight: 600,
+              paddingRight: "8px",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              color: isDark ? "#f3f4f6" : "#111827",
+            }}
           >
             {text.title}
           </h3>
           <button
             onClick={handleClose}
-            className="p-1 rounded-full flex-shrink-0 transition-colors"
-            style={{ color: isDark ? "#6b7280" : "#9ca3af" }}
+            style={{
+              boxSizing: "border-box",
+              padding: "4px",
+              borderRadius: "9999px",
+              flexShrink: 0,
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: isDark ? "#6b7280" : "#9ca3af",
+            }}
             aria-label="Close popup"
           >
             <svg
-              className="w-5 h-5"
+              style={{ width: "20px", height: "20px" }}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -182,28 +249,41 @@ const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps> = ({
         </div>
 
         {/* Content */}
-        <div className="mb-6">
+        <div style={{ marginBottom: "24px" }}>
           <p
-            className="text-sm mb-4 break-words"
-            style={{ color: isDark ? "#d1d5db" : "#4b5563" }}
+            style={{
+              margin: "0 0 16px 0",
+              fontSize: "14px",
+              overflowWrap: "break-word",
+              color: isDark ? "#d1d5db" : "#4b5563",
+            }}
           >
             {text.description}
           </p>
 
           {/* Instructions */}
           <div
-            className="rounded-lg p-4 mb-4"
             style={{
+              boxSizing: "border-box",
+              borderRadius: "8px",
+              padding: "16px",
+              marginBottom: "16px",
               backgroundColor: isDark ? "rgba(30,58,138,0.3)" : "#eff6ff",
               border: `1px solid ${isDark ? "#1e3a5f" : "#bfdbfe"}`,
             }}
           >
             <p
-              className="text-sm font-medium mb-3 flex items-center"
-              style={{ color: isDark ? "#bfdbfe" : "#1e40af" }}
+              style={{
+                margin: "0 0 12px 0",
+                fontSize: "14px",
+                fontWeight: 500,
+                display: "flex",
+                alignItems: "center",
+                color: isDark ? "#bfdbfe" : "#1e40af",
+              }}
             >
               <svg
-                className="w-4 h-4 mr-2 flex-shrink-0"
+                style={{ width: "16px", height: "16px", marginRight: "8px", flexShrink: 0 }}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -215,38 +295,30 @@ const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps> = ({
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <span className="break-words">{text.howToTitle}</span>
+              <span style={{ overflowWrap: "break-word" }}>{text.howToTitle}</span>
             </p>
             <ol
-              className="text-sm space-y-2"
-              style={{ color: isDark ? "#93c5fd" : "#1d4ed8" }}
+              style={{
+                listStyle: "none",
+                margin: 0,
+                padding: 0,
+                display: "flex",
+                flexDirection: "column",
+                gap: "8px",
+                fontSize: "14px",
+                color: isDark ? "#93c5fd" : "#1d4ed8",
+              }}
             >
-              <li className="flex items-start">
-                <span
-                  className="rounded-full w-5 h-5 flex items-center justify-center text-xs font-medium mr-3 mt-0.5 flex-shrink-0"
-                  style={{
-                    backgroundColor: isDark ? "#1e3a8a" : "#bfdbfe",
-                    color: isDark ? "#bfdbfe" : "#1e40af",
-                  }}
-                >
-                  1
-                </span>
-                <span className="break-words">
+              <li style={{ display: "flex", alignItems: "flex-start" }}>
+                <span style={stepBadgeStyle}>1</span>
+                <span style={{ overflowWrap: "break-word" }}>
                   Tap the <strong>three dots (...)</strong> in the top right
                   corner
                 </span>
               </li>
-              <li className="flex items-start">
-                <span
-                  className="rounded-full w-5 h-5 flex items-center justify-center text-xs font-medium mr-3 mt-0.5 flex-shrink-0"
-                  style={{
-                    backgroundColor: isDark ? "#1e3a8a" : "#bfdbfe",
-                    color: isDark ? "#bfdbfe" : "#1e40af",
-                  }}
-                >
-                  2
-                </span>
-                <span className="break-words">
+              <li style={{ display: "flex", alignItems: "flex-start" }}>
+                <span style={stepBadgeStyle}>2</span>
+                <span style={{ overflowWrap: "break-word" }}>
                   Select <strong>"Open in External Browser"</strong> or{" "}
                   <strong>"Open in Chrome/Safari"</strong>
                 </span>
@@ -258,18 +330,27 @@ const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps> = ({
         {/* Copied feedback */}
         {copied && (
           <div
-            className="rounded-lg px-4 py-3 mb-4"
             style={{
+              boxSizing: "border-box",
+              borderRadius: "8px",
+              padding: "12px 16px",
+              marginBottom: "16px",
               backgroundColor: isDark ? "rgba(20,83,45,0.3)" : "#f0fdf4",
               border: `1px solid ${isDark ? "#14532d" : "#bbf7d0"}`,
             }}
           >
             <p
-              className="text-sm font-medium flex items-center"
-              style={{ color: isDark ? "#86efac" : "#15803d" }}
+              style={{
+                margin: 0,
+                fontSize: "14px",
+                fontWeight: 500,
+                display: "flex",
+                alignItems: "center",
+                color: isDark ? "#86efac" : "#15803d",
+              }}
             >
               <svg
-                className="w-4 h-4 mr-2 flex-shrink-0"
+                style={{ width: "16px", height: "16px", marginRight: "8px", flexShrink: 0 }}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -281,17 +362,24 @@ const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps> = ({
                   d="M5 13l4 4L19 7"
                 />
               </svg>
-              <span className="break-words">{text.linkCopiedMessage}</span>
+              <span style={{ overflowWrap: "break-word" }}>{text.linkCopiedMessage}</span>
             </p>
           </div>
         )}
 
         {/* Actions */}
-        <div className="flex flex-col gap-2">
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           <button
             onClick={handleOpenInBrowser}
-            className="w-full font-semibold py-3 px-4 rounded-lg text-sm transition-colors"
             style={{
+              boxSizing: "border-box",
+              width: "100%",
+              fontWeight: 600,
+              padding: "12px 16px",
+              borderRadius: "8px",
+              fontSize: "14px",
+              border: "none",
+              cursor: "pointer",
               backgroundColor: "#2563eb",
               color: "#ffffff",
             }}
@@ -299,16 +387,25 @@ const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps> = ({
           >
             {text.openInBrowserButton}
           </button>
-          <button
-            onClick={handleClose}
-            className="w-full px-4 py-3 rounded-lg text-sm font-medium transition-colors"
-            style={{
-              backgroundColor: isDark ? "#374151" : "#f3f4f6",
-              color: isDark ? "#e5e7eb" : "#374151",
-            }}
-          >
-            {text.continueButton}
-          </button>
+          {showContinueButton && (
+            <button
+              onClick={handleClose}
+              style={{
+                boxSizing: "border-box",
+                width: "100%",
+                padding: "12px 16px",
+                borderRadius: "8px",
+                fontSize: "14px",
+                fontWeight: 500,
+                border: "none",
+                cursor: "pointer",
+                backgroundColor: isDark ? "#374151" : "#f3f4f6",
+                color: isDark ? "#e5e7eb" : "#374151",
+              }}
+            >
+              {text.continueButton}
+            </button>
+          )}
         </div>
       </div>
     </div>
@@ -316,3 +413,5 @@ const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps> = ({
 };
 
 export default SocialBrowserDetector;
+export { SocialBrowserDetector, SocialBrowserDetector as Unsocial };
+export type { SocialBrowserDetectorProps };

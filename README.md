@@ -1,4 +1,4 @@
-# Social Browser Detector
+# Unsocial
 
 A lightweight React component that detects when users are viewing your website in social media apps' internal browsers (Facebook, Instagram, etc.) and shows a helpful popup encouraging them to open the page in their external browser for a better experience.
 
@@ -13,7 +13,7 @@ A lightweight React component that detects when users are viewing your website i
 - 📱 **Mobile Optimized** - Designed for mobile social media usage patterns
 - ♿ **Accessible** - Full ARIA support and semantic HTML
 - 🎨 **Customizable** - Custom text, styling, and behavior options
-- 📦 **Lightweight** - Minimal bundle size with no external dependencies
+- 📦 **Lightweight** - Minimal bundle size, no external dependencies, no CSS framework required
 - 🔧 **TypeScript** - Full type safety and IntelliSense support
 
 ## 🚀 Installation
@@ -28,20 +28,21 @@ npm install unsocial
 
 ## 📋 Requirements
 
-- React 16.8+
-- Tailwind CSS (for styling)
+- React 17, 18, or 19
+
+That's it. Styling is fully self-contained (inline styles), so no Tailwind or CSS setup is needed.
 
 ## 🛠️ Usage
 
 ### Basic Usage
 
 ```tsx
-import SocialBrowserDetector from "unsocial";
+import { Unsocial } from "unsocial";
 
 function App() {
   return (
     <div>
-      <SocialBrowserDetector />
+      <Unsocial />
       {/* Your app content */}
     </div>
   );
@@ -51,7 +52,7 @@ function App() {
 ### Custom Text
 
 ```tsx
-<SocialBrowserDetector
+<Unsocial
   customText={{
     title: "Better Experience Available",
     description:
@@ -62,25 +63,34 @@ function App() {
 />
 ```
 
+### Hide the "Continue Here" Button
+
+Force users toward the external browser by removing the continue option:
+
+```tsx
+<Unsocial showContinueButton={false} />
+```
+
 ### Debug Mode (for testing/development)
 
 ```tsx
-<SocialBrowserDetector debugMode={true} />
+<Unsocial debugMode={true} />
 ```
 
 ### Custom Styling
 
 ```tsx
-<SocialBrowserDetector className="custom-popup-styles" />
+<Unsocial className="custom-popup-styles" />
 ```
 
 ## 🎛️ Props
 
-| Prop         | Type      | Default | Description                     |
-| ------------ | --------- | ------- | ------------------------------- |
-| `className`  | `string`  | `""`    | Additional CSS classes          |
-| `customText` | `object`  | -       | Custom text content (see below) |
-| `debugMode`  | `boolean` | `false` | Always show popup for testing   |
+| Prop                 | Type      | Default | Description                     |
+| -------------------- | --------- | ------- | ------------------------------- |
+| `className`          | `string`  | `""`    | Additional CSS classes on the overlay |
+| `customText`         | `object`  | -       | Custom text content (see below) |
+| `debugMode`          | `boolean` | `false` | Always show popup for testing   |
+| `showContinueButton` | `boolean` | `true`  | Show the "Continue Here" button |
 
 ### Custom Text Object
 
@@ -89,8 +99,19 @@ interface CustomText {
   title?: string; // Popup title
   description?: string; // Main description text
   howToTitle?: string; // Instructions title
-  continueButton?: string; // Button text
+  openInBrowserButton?: string; // Primary button text
+  linkCopiedMessage?: string; // Message after copying the link
+  continueButton?: string; // Continue button text
 }
+```
+
+### Exports
+
+```tsx
+import Unsocial from "unsocial"; // default export
+import { Unsocial } from "unsocial"; // named export
+import { SocialBrowserDetector } from "unsocial"; // alias, same component
+import type { SocialBrowserDetectorProps } from "unsocial";
 ```
 
 ## 🔍 Detected Browsers
@@ -104,12 +125,11 @@ The component detects these social media in-app browsers:
 
 ## 🎨 Styling
 
-The component uses Tailwind CSS classes and automatically supports:
+The component ships with self-contained inline styles (no CSS framework needed) and automatically supports:
 
 - **Light Mode** - Clean, modern light theme
 - **Dark Mode** - Automatically enabled based on user's system preference
 - **Responsive Design** - Optimized for mobile devices
-- **Smooth Animations** - Subtle fade-in effects
 
 ### Dark Mode
 
@@ -131,8 +151,10 @@ When a social media browser is detected, users see:
 
 1. **Clear explanation** of why external browser is better
 2. **Step-by-step instructions** on how to open externally
-3. **Option to continue** in the current browser
+3. **Option to continue** in the current browser (can be disabled)
 4. **Accessible design** with proper focus management
+
+On Android, the primary button opens the page directly in the default browser via an intent URL. On iOS, it copies the link so users can paste it into Safari.
 
 ## 🔧 Development
 
@@ -141,20 +163,13 @@ When a social media browser is detected, users see:
 ```bash
 git clone https://github.com/2u841r/unsocial
 cd unsocial
-npm install
-npm run dev
+pnpm install
 ```
 
 ### Building
 
 ```bash
-npm run build
-```
-
-### Testing
-
-```bash
-npm test
+pnpm build
 ```
 
 ## 🤝 Contributing
