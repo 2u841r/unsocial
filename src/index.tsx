@@ -24,6 +24,41 @@ interface SocialBrowserDetectorProps {
 }
 
 /**
+ * Returns the social app name for a given user agent, or "" if none detected.
+ */
+function detectSocialApp(userAgent: string): string {
+  if (userAgent.includes("Instagram")) return "Instagram";
+  if (userAgent.includes("FB_IAB")) return "Facebook";
+  if (userAgent.includes("FBAN/FBIOS")) return "Facebook";
+  if (userAgent.includes("FBAV")) return "Facebook";
+  return "";
+}
+
+/**
+ * Hook that detects whether the page is running inside a social media
+ * in-app browser. SSR-safe: returns false on the server and during the
+ * first client render, then updates after mount (no hydration mismatch).
+ *
+ * @example
+ * ```tsx
+ * const { isSocialBrowser } = useSocialBrowser();
+ * return isSocialBrowser ? <EmailLogin /> : <GoogleLogin />;
+ * ```
+ */
+export function useSocialBrowser(): {
+  isSocialBrowser: boolean;
+  appName: string;
+} {
+  const [appName, setAppName] = useState("");
+
+  useEffect(() => {
+    setAppName(detectSocialApp(navigator.userAgent));
+  }, []);
+
+  return { isSocialBrowser: appName !== "", appName };
+}
+
+/**
  * A React component that detects when users are viewing your site
  * in social media apps' internal browsers (Facebook, Instagram, etc.)
  * and shows a popup encouraging them to open in external browser.
@@ -68,18 +103,7 @@ const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps> = ({
 
   useEffect(() => {
     const detectSocialBrowser = () => {
-      const userAgent = navigator.userAgent;
-      let appName = "";
-
-      if (userAgent.includes("Instagram")) {
-        appName = "Instagram";
-      } else if (userAgent.includes("FB_IAB")) {
-        appName = "Facebook";
-      } else if (userAgent.includes("FBAN/FBIOS")) {
-        appName = "Facebook";
-      } else if (userAgent.includes("FBAV")) {
-        appName = "Facebook";
-      }
+      const appName = detectSocialApp(navigator.userAgent);
 
       if (appName || debugMode) {
         setDetectedApp(appName || "Debug Mode");

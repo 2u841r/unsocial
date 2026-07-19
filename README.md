@@ -71,6 +71,31 @@ Force users toward the external browser by removing the continue option:
 <Unsocial showContinueButton={false} />
 ```
 
+### Hook: Conditional Rendering
+
+Some features don't work in in-app browsers (e.g. Google OAuth blocks
+embedded WebViews). Use the `useSocialBrowser` hook to show or hide
+anything based on detection:
+
+```tsx
+import { useSocialBrowser } from "unsocial";
+
+function LoginButtons() {
+  const { isSocialBrowser, appName } = useSocialBrowser();
+
+  return (
+    <div>
+      {!isSocialBrowser && <GoogleLoginButton />}
+      <EmailLoginButton />
+      {isSocialBrowser && <p>Google login unavailable in {appName}'s browser.</p>}
+    </div>
+  );
+}
+```
+
+SSR-safe: returns `false` on the server and first client render, then
+updates after mount, so there is no hydration mismatch.
+
 ### Debug Mode (for testing/development)
 
 ```tsx
@@ -111,6 +136,7 @@ interface CustomText {
 import Unsocial from "unsocial"; // default export
 import { Unsocial } from "unsocial"; // named export
 import { SocialBrowserDetector } from "unsocial"; // alias, same component
+import { useSocialBrowser } from "unsocial"; // detection hook
 import type { SocialBrowserDetectorProps } from "unsocial";
 ```
 
