@@ -14,8 +14,7 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist",
-    "prepublishOnly": "npm run clean && npm run build",
-    "publish": "npm version patch && npm publish --otp=YOUR_CODE"
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "keywords": [
     "unsocial",
