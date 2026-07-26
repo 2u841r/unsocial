@@ -235,4 +235,4 @@ Social media apps use internal browsers that often have limited functionality, s
 
 Made with ❤️ for better web experiences
 
-![](https://rs2.deno.dev/2u841r/unsocial)
+![](https://repostats.zizdjbd.workers.dev/2u841r/unsocial)
