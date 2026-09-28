@@ -58,8 +58,10 @@ function App() {
     description:
       "Open in your browser for full functionality and faster loading.",
     howToTitle: "Quick steps to open externally:",
-    continueButton: "Stay Here",
+    openInBrowserButton: "Open in Browser",
+    continueButton: "Continue Here",
   }}
+  showContinueButton={true}
 />
 ```
 
@@ -110,12 +112,12 @@ updates after mount, so there is no hydration mismatch.
 
 ## 🎛️ Props
 
-| Prop                 | Type      | Default | Description                     |
-| -------------------- | --------- | ------- | ------------------------------- |
-| `className`          | `string`  | `""`    | Additional CSS classes on the overlay |
-| `customText`         | `object`  | -       | Custom text content (see below) |
-| `debugMode`          | `boolean` | `false` | Always show popup for testing   |
-| `showContinueButton` | `boolean` | `true`  | Show the "Continue Here" button |
+| Prop                 | Type      | Default | Description                              |
+| -------------------- | --------- | ------- | ---------------------------------------- |
+| `className`          | `string`  | `""`    | Additional CSS classes on the overlay   |
+| `customText`         | `object`  | -       | Custom text content (see below)          |
+| `showContinueButton` | `boolean` | `false` | Show the "Continue Here" button          |
+| `debugMode`          | `boolean` | `false` | Always show popup for testing            |
 
 ### Custom Text Object
 

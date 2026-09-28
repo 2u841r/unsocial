@@ -17,10 +17,10 @@ interface SocialBrowserDetectorProps {
     linkCopiedMessage?: string;
     continueButton?: string;
   };
+  /** Show a button that closes the prompt and stays in the current browser */
+  showContinueButton?: boolean;
   /** Enable debug mode to always show the popup */
   debugMode?: boolean;
-  /** Show the "Continue Here" button (default: true). Set false to force users toward the external browser. */
-  showContinueButton?: boolean;
 }
 
 /**
@@ -83,8 +83,8 @@ export function useSocialBrowser(): {
 const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps> = ({
   className = "",
   customText,
+  showContinueButton = false,
   debugMode = false,
-  showContinueButton = true,
 }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [detectedApp, setDetectedApp] = useState<string>("");
@@ -158,7 +158,7 @@ const SocialBrowserDetector: React.FC<SocialBrowserDetectorProps> = ({
       customText?.description ||
       `You're viewing this page in ${detectedApp}'s internal browser. For the best experience, please open this page in your default browser.`,
     howToTitle: customText?.howToTitle || "How to open in external browser:",
-    openInBrowserButton: customText?.openInBrowserButton || (isAndroid ? "Open in Browser" : "Copy Link"),
+    openInBrowserButton: customText?.openInBrowserButton || "Open in Browser",
     linkCopiedMessage: customText?.linkCopiedMessage || "Link copied! Paste it in Safari or your browser.",
     continueButton: customText?.continueButton || "Continue Here",
   };
